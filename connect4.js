@@ -29,20 +29,23 @@ function makeBoard() {
 
 function makeHtmlBoard() {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
-
-  // TODO: add comment for this code
+  const htmlBoard = document.getElementById("board");
+  // TODO: this adds a new table role HTML element
+  // and adds a new ID and click event to that table row
   const top = document.createElement("tr");
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
-
+  // This loop adds a column with an id of x (tranversing horizontally)
+  // Then appends it to the top table row
   for (let x = 0; x < WIDTH; x++) {
     const headCell = document.createElement("td");
     headCell.setAttribute("id", x);
     top.append(headCell);
   }
-  htmlBoard.append(top);
+  htmlBoard.append(top); //appended to HTML Board Table At the Very Top
 
-  // TODO: add comment for this code
+  // This setups the actual game board and appends to the top row 
+  // New Rows are appended from the bottom
   for (let y = 0; y < HEIGHT; y++) {
     const row = document.createElement("tr");
     for (let x = 0; x < WIDTH; x++) {
