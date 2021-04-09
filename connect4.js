@@ -10,15 +10,19 @@ const WIDTH = 7;
 const HEIGHT = 6;
 
 let currPlayer = 1; // active player: 1 or 2
-const board = []; // array of rows, each row is array of cells  (board[y][x])
-//made the array a constant because of the reference
+let board = []; // array of rows, each row is array of cells  (board[y][x])
 
-/** makeBoard: create in-JS board structure:
- *    board = array of rows, each row is array of cells  (board[y][x])
- */
 
+/*  makeBoard: create in-JS board structure:  board = array of rows, 
+    each row is array of cells  (board[y][x])  */
 function makeBoard() {
   // TODO: set "board" to empty HEIGHT x WIDTH matrix array
+  for (let h = 0; h < HEIGHT; h++) {
+    board[h] = new Array;
+    for (let w = 0; w < WIDTH; w++) {
+      board[h][w] = null;
+    }//end of width loop 
+  }//end of height loop
 }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
