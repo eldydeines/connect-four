@@ -3,6 +3,8 @@
  * Player 1 and 2 alternate turns. On each turn, a piece is dropped down a
  * column until a player gets four-in-a-row (horiz, vert, or diag) or until
  * board fills (tie)
+ * 
+ * Eldy Deines (Updated Solution)
  */
 
 //these values won't be changing
@@ -61,6 +63,13 @@ function makeHtmlBoard() {
 
 function findSpotForCol(x) {
   // TODO: write the real version of this, rather than always returning 0
+  let y = (HEIGHT - 1);
+  while (y >= 0) {
+    if (board[y][x] === null) {
+      return y;
+    }
+    y--;
+  }
   return 0;
 }
 
@@ -80,6 +89,7 @@ function placeInTable(y, x) {
 
 function endGame(msg) {
   // TODO: pop up alert message
+  alert(`Player${currPlayer} is the winner!`)
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -97,6 +107,7 @@ function handleClick(evt) {
   // place piece in board and add to HTML table
   // TODO: add line to update in-memory board
   placeInTable(y, x);
+  board[y][x] = currPlayer;
 
   // check for win
   if (checkForWin()) {
@@ -105,9 +116,18 @@ function handleClick(evt) {
 
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
+  const isBoardFilled = board.
+    every(function (subArray) {
+      return subArray.every(function (value) {
+        return value !== null;
+      });
+    });
+  //came up with the above solution by checking this question and answer 
+  //https://forum.freecodecamp.org/t/how-to-map-a-subarray-or-nested-array/137761/2
 
   // switch players
   // TODO: switch currPlayer 1 <-> 2
+  currPlayer = (currPlayer === 1) ? 2 : 1;
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
@@ -129,7 +149,8 @@ function checkForWin() {
   }
 
   // TODO: read and understand this code. Add comments to help you.
-
+  // This for loop runs through all scenarios to see if four
+  // of the same player are near each other for cell in the array.
   for (let y = 0; y < HEIGHT; y++) {
     for (let x = 0; x < WIDTH; x++) {
       const horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
